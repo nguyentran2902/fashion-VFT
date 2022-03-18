@@ -1,0 +1,32 @@
+{
+  "name": "fashion",
+  "version": "1.0.0",
+  "description": "Author: \t\tKeenThemes\r Website: \t\thttp://www.keenthemes.com/\r Contact: \t\tsupport@keenthemes.com\r Follow: \t\thttp://twitter.com/keenthemes\r Like: \t\t\thttp://facebook.com/keenthemes",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lamsoc010/fashion-VFT.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lamsoc010/fashion-VFT/issues"
+  },
+  "homepage": "https://github.com/lamsoc010/fashion-VFT#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "body-parser": "^1.19.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.3",
+    "express-fileupload": "^1.3.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
