@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="icon" href="../img/myLogo.png" type="image/x-icon">
+    <link rel="stylesheet" href="assets/pages/css/admin.css">
+    <title>Admin</title>
+
+
+</head>
+
+<body>
+    <div id="admin" class="p-4">
+        <div class="container-fluid">
+            <div class="row d-flex">
+                <!-- ________________________ -->
+                <div class="col-md-2 ad-menu px-0">
+                    <div class="ad-brand d-flex justify-content-center px-3">
+                        <div class="d-flex align-items-center ps-2">
+                            <img src="../img/admin.jpg" class="card-img-top circle">
+
+                        </div>
+                        <div class="card-body">
+                            <h5 class="text-primary fw-bold">Admin</h5>
+                            <p class="card-text text-secondary">Administrator</p>
+                        </div>
+                    </div>
+                    <div class="ps-3 py-2">
+                        <h5 class="text-primary fw-bold">Menu</h5>
+                    </div>
+                    <div class="ad-items">
+                        <ul>
+                            <li class="list-menu-items">
+                                <i class="fas pe-1 fa-chart-bar text-info"></i> Doanh thu
+                            </li>
+                            <li class="list-menu-items ">
+                                <i class="fas pe-1 fa-users text-danger"></i> Tài khoản
+                            </li>
+                            <li class=" list-menu-items active">
+                                <i class="fas pe-1 fa-lemon text-warning"></i> Sản phẩm</li>
+                            <li class="list-menu-items">
+                                <i class="fas pe-1 fa-cart-arrow-down text-info"></i> Danh sách đặt hàng</li>
+                            <li class=" list-menu-items">
+                                <i class="fas pe-1 fa-comments text-success"></i> Phản hồi
+                            </li>
+                            <li class="sub-menu">
+                                <div data-bs-toggle="collapse" href="#collapseMenu">
+                                    <i class="fab pe-1 fa-page4 text-danger"></i> Các trang
+                                    <i class="fas fa-sort-down ps-1"></i>
+                                </div>
+
+                                <ul class="collapse py-2" id="collapseMenu">
+                                    <li>
+                                        <a href="index.html">Trang chủ</a>
+                                    </li>
+                                    <li>
+                                        <a href="allProduct.html">Tất cả sản phẩm</a>
+                                    </li>
+                                    <li>
+                                        <a href="product.html">Sản phẩm chi tiết</a>
+                                    </li>
+                                    <li>
+                                        <a href="thanh-toan-ngay.html">Giỏ hàng</a>
+                                    </li>
+                                    <li>
+                                        <a href="introduce.html">Giới thiệu</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- ____________________________ -->
+                <div class="col-md-10 ad-content p-0">
+                    <!-- ___________________________________ -->
+                    <div class=" ad-content-header d-flex align-items-center justify-content-between px-3">
+                        <form class="navbar-search d-flex col-6 ">
+                            <input id="search-input" onkeyup="myFilter()" class="form-control btn-search" type="search" placeholder="Tìm kiếm" aria-label="Search">
+                            <i class="fas fa-search text-center"></i>
+                        </form>
+                        <div class="d-flex">
+                            <button class="navbar-log btn ">
+                                <i class="fas fa-bell"></i>
+
+                            </button>
+                            <button class="navbar-log btn  ">
+                                <i class="fas fa-cogs"></i>
+
+                            </button>
+
+                            <button type="button" class="navbar-log btn ">
+                                    <i class="fas fa-user"></i>
+                                   <span class="user-name ps-1" > Admin
+                                   </span>
+                                   <i class="fas fa-sort-down ps-1"></i>
+
+                            </button>
+
+                        </div>
+                    </div>
+
+
+                    <!-- _______________Doanh thu_____________________ -->
+                    <div class="ad-content-items m-2 px-2 py-5 bg-white">
+                        <div class="ad-content-title mb-3 text-primary">
+                            <h4>Doanh thu cửa hàng tháng 7</h4>
+                        </div>
+
+                        <div class="text-center">
+
+                            <canvas id="frame_canvas" width=500 height=300>
+                           
+                        </canvas>
+                        </div>
+                    </div>
+
+                    <!-- _______________users_____________________ -->
+                    <div class=" ad-content-items m-2 px-2 py-5 bg-white">
+                        <div class="ad-content-title mb-3 text-primary">
+                            <h4>Danh sách tài khoản khách hàng</h4>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table table-bordered ">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col">#</th>
+                                        <th class="text-center" scope="col">Tài khoản</th>
+                                        <th class="text-center" scope="col">Email</th>
+                                        <th class="text-center" scope="col">Mật khẩu</th>
+                                        <th class="text-center" scope="col">SĐT</th>
+                                        <th class="text-center" scope="col">Địa chỉ</th>
+                                        <th class="text-center" scope="col">Note</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="list-user">
+                                    <!-- render -->
+                                </tbody>
+
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- _______________products_____________________ -->
+
+                    <div class="ad-content-items m-2 px-2 py-5 bg-white active">
+
+                        <div class="ad-content-title mb-3 text-primary">
+                            <h4>Danh sách sản phẩm</h4>
+                        </div>
+
+                        <!-- ________________________________ -->
+                        <div class="mb-3 d-flex justify-content-end">
+                            <div class="col-md-3">
+                                <select onchange="mySort(this)" class="form-select" aria-label="Default select example">
+                                    <option  value="0" class="text-center">------ Lọc ------</option>
+                                    <option  value="1">Giá từ thấp đến cao</option>
+                                    <option  value="2">Giá từ cao đến thấp</option>
+                                    <option  value="vegetable">Rau củ sạch</option>
+                                    <option  value="fruit">Hoa quả</option>
+                                    <option  value="dryP">Thực phẩm khô</option>
+                               </select>
+                            </div>
+                        </div>
+
+
+                        <!-- ______________________________-- -->
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col">#</th>
+                                        <th class="text-center" scope="col">Ảnh</th>
+                                        <th class="text-center" scope="col">Tên sản phẩm</th>
+                                        <th class="text-center" scope="col">Loại sản phẩm</th>
+                                        <th class="text-center" scope="col">Giá</th>
+                                        <th class="text-center" scope="col">Mô tả</th>
+                                        <th class="text-center" scope="col">Note</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="list-product">
+                                    <!-- render -->
+                                    <tr class="product-item product-item-" name="">
+                                        <th class="text-center stt-product"></th>
+                                        <td class="text-center ">
+                                            <img class="img-thumbnail" src=""></img>
+                                        </td>
+                                        <td class="name-product text-center text-primary"></td>
+                                        <td class="name-product text-center text-primary"></td>
+                                        <td class="text-center"></td>
+                                        <td class="price-product text-center text-danger"></td>
+                                        <th class="text-center">
+                                                <div  class="btnProduct-click-${product.id} btn-group " role="group">
+                                                <a type="button" onclick="update('')" class="btn btn-info text-white">Update</a>
+                                                </div>
+                                                <div class="btnProduct-delete-${product.id} btn-group" role="group">
+                                                <a href="/admin/product/delete/" type="button" class="btn btn-danger">Xóa</a>
+                                                </div>
+                                        </th>
+                                    </tr>
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div class="add-product">
+
+                            <h4 class="text-primary  my-3">Thêm sản phẩm</h4>
+
+
+                            <form id="form-addproduct" method="POST" action="/store/product" enctype="multipart/form-data">
+
+                                <div class="mb-3 ">
+                                    <div class="d-flex">
+                                        <label class="col-md-2 fw-bold col-form-label">Tên sản phẩm:</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="name" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 ">
+                                    <div class="d-flex">
+                                        <label class="col-md-2 fw-bold col-form-label">Loại sản phẩm:</label>
+                                        <div class="col-md-6">
+                                            <select id="type-product" name="type" class="form-select ">
+                                                <option value="chairs" selected>Chairs</option>
+                                                <option value="beds">Beds</option>
+                                                <option value="accesories">Accesories</option>
+                                                <option value="furniture">Furniture</option>
+                                                <option value="homedemo">Home Demo</option>
+                                               
+                                              </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 ">
+                                    <div class="d-flex">
+                                        <label class="col-md-2 fw-bold col-form-label">Giá:</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="price" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex">
+                                        <label class="col-md-2 fw-bold col-form-label">Mô tả</label>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="description" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="d-flex">
+                                        <label class="col-md-2 fw-bold col-form-label">Ảnh sản phẩm:</label>
+                                        <div class="col-md-6">
+                                            <input type="file" class="form-control" name="image" required>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <div class="text-center me-5">
+                                        <button type="submit" class="create btn btn-primary me-5">Thêm sản phẩm</button>
+                                        <button type="submit" class="update btn btn-primary me-5">Sửa sản phẩm</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- _______________oder-infor_____________________ -->
+
+                    <div class="ad-content-items m-2 px-2 py-5 bg-white">
+                        <div class="ad-content-title mb-3 text-primary">
+                            <h4>Danh sách đơn đặt hàng</h4>
+                        </div>
+
+                        <div class="table-responsive" id="list-oder">
+
+
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center" scope="col">#</th>
+                                        <th class="text-center" scope="col">Mã đơn</th>
+                                        <th class="text-center" scope="col">Khách hàng</th>
+                                        <th class="text-center" scope="col">Địa chỉ</th>
+                                        <th class="text-center" scope="col">Thời gian</th>
+                                        <th class="text-center" scope="col">Note</th>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody id="list-inforUser-oder">
+                                    <!-- render -->
+                                    
+                                </tbody>
+
+                            </table>
+                        </div>
+
+                        <div id="detail-oder">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">#</th>
+                                            <th scope="col">Sản phẩm</th>
+                                            <th scope="col">Phân loại</th>
+                                            <th scope="col">Đơn giá</th>
+                                            <th scope="col" class="text-center">Số lượng(kg)</th>
+                                            <th scope="col">Thành tiền</th>
+
+                                        </tr>
+                                    </thead>
+
+                                    <tbody id="oder-product">
+                                        <!-- render -->
+                                        
+                                    </tbody>
+
+                                </table>
+                            </div>
+
+                            <div class="table-responsive d-flex justify-content-center my-3">
+                                <table>
+                                    <tbody id="inforUser-oder">
+                                        <!-- render -->
+                                    </tbody>
+                                </table>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- _______________comments_____________________ -->
+
+                    <div class="ad-content-items m-2 px-2 py-5 bg-white">
+                        <div class="ad-content-title mb-3 text-primary">
+                            <h4>Danh sách phản hồi</h4>
+                        </div>
+
+                        <div class="list-rated">
+                            <!-- rd -->
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+    <!-- ________________________JavaScript________________________ -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/plugins/admin.js"></script>
+    <script>
+        let updateButton = document.querySelector('.update');
+        updateButton.style.display = "none";
+
+        function update(id) {
+            console.log(typeof id)
+        }
+
+    </script>
+
+
+</body>
+
+</html>
