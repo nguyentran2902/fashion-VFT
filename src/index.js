@@ -2,9 +2,12 @@
 import express from 'express';
 import configViewEngine from './configs/viewEngine';
 import initWebRoute from './route/web';
+import mongoose from 'mongoose';
+mongoose.connect('mongodb://localhost/fashion-VFT', { useNewUrlParser: true });
 
 const app = express();
 const port = 3000;
+
 
 // setup view engine
 configViewEngine(app);
@@ -21,9 +24,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({type: 'application/json'}));
 app.use(bodyParser.raw());
 
-// mongoose
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/amado_database', { useNewUrlParser: true });
 
 // file upload
 const fileUpload = require('express-fileupload');

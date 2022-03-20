@@ -1,10 +1,11 @@
 import express from "express";
-import homeController from "../controllers/homeController";
 let router = express.Router();
+import homeController from "../controllers/homeController";
 
 const initWebRoute = (app) => {
+    router.get('/fake-api-product', homeController.getFakeApiProduct);
+    
     router.get('/', homeController.getHomepage);
-
     router.get('/shop-item', homeController.getShopItem)
     router.get('/shop-account', homeController.getShopAccout)
     router.get('/shop-checkout', homeController.getShopCheckout)
