@@ -1177,6 +1177,13 @@ steps block and steps block elements
 	border: none;
 	color: #868c93;
 }
+.pagination .active{
+	background: #555;
+    color: #fff;
+}
+
+
+
 .pagination > li > span,
 .pagination > li > span:hover {
 	background: #555;
