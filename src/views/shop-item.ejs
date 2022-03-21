@@ -82,17 +82,17 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
             <div class="sidebar-products clearfix">
               <h2>Bestsellers</h2>
               <div class="item">
-                <a href="shop-item"><img src="assets/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                <a href="shop-item"><img src="/assets/pages/img/products/k1.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item">Some Shoes in Animal with Cut Out</a></h3>
                 <div class="price">$31.00</div>
               </div>
               <div class="item">
-                <a href="shop-item"><img src="assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                <a href="shop-item"><img src="/assets/pages/img/products/k4.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item">Some Shoes in Animal with Cut Out</a></h3>
                 <div class="price">$23.00</div>
               </div>
               <div class="item">
-                <a href="shop-item"><img src="assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
+                <a href="shop-item"><img src="/assets/pages/img/products/k3.jpg" alt="Some Shoes in Animal with Cut Out"></a>
                 <h3><a href="shop-item">Some Shoes in Animal with Cut Out</a></h3>
                 <div class="price">$86.00</div>
               </div>
@@ -106,44 +106,50 @@ Purchase Premium Metronic Admin Theme: http://themeforest.net/item/metronic-resp
               <div class="row">
                 <div class="col-md-6 col-sm-6">
                   <div class="product-main-image">
-                    <img src="assets/pages/img/products/model7.jpg" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="assets/pages/img/products/model7.jpg">
+                    <img src="<%= detailProduct.image[0] %>" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="assets/pages/img/products/model7.jpg">
                   </div>
                   <div class="product-other-images">
-                    <a href="assets/pages/img/products/model3.jpg" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="assets/pages/img/products/model3.jpg"></a>
-                    <a href="assets/pages/img/products/model4.jpg" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="assets/pages/img/products/model4.jpg"></a>
-                    <a href="assets/pages/img/products/model5.jpg" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="assets/pages/img/products/model5.jpg"></a>
+                    <% for(let i = 1; i < detailProduct.image.length; i++) {%>
+                    <a href="<%= detailProduct.image[i] %>" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="<%= detailProduct.image[i] %>"></a>
+                    <% } %>
                   </div>
                 </div>
                 <div class="col-md-6 col-sm-6">
-                  <h1>Cool green dress with red bell</h1>
+                  <h1><%= detailProduct.name %></h1>
                   <div class="price-availability-block clearfix">
                     <div class="price">
-                      <strong><span>$</span>47.00</strong>
-                      <em>$<span>62.00</span></em>
+                      <!-- Nếu sale mới hiển thị gạch giá -->
+                      <% if(detailProduct.sale != 0) { %>
+                      <strong><span>$</span><%= detailProduct.price - (detailProduct.sale/100)*detailProduct.price %></strong>
+                      <em>$<span><%= detailProduct.price %></span></em>
+                      <% } %>
+                      <% if(detailProduct.sale == 0) { %>
+                        <strong><span>$</span><%= detailProduct.price %></strong>
+                      <% } %>
+
                     </div>
                     <div class="availability">
-                      Availability: <strong>In Stock</strong>
+                      Availability: <strong><%= detailProduct.status %></strong>
                     </div>
                   </div>
                   <div class="description">
-                    <p>Lorem ipsum dolor ut sit ame dolore  adipiscing elit, sed nonumy nibh sed euismod laoreet dolore magna aliquarm erat volutpat 
-Nostrud duis molestie at dolore.</p>
+                    <p><%= detailProduct.description %></p>
                   </div>
                   <div class="product-page-options">
                     <div class="pull-left">
                       <label class="control-label">Size:</label>
                       <select class="form-control input-sm">
-                        <option>L</option>
-                        <option>M</option>
-                        <option>XL</option>
+                        <% for(let i =0; i < detailProduct.storage.length; i++) { %>
+                        <option value="<%= detailProduct.storage[i].size %>"><%= detailProduct.storage[i].size %></option>
+                        <%}%>
                       </select>
                     </div>
                     <div class="pull-left">
                       <label class="control-label">Color:</label>
                       <select class="form-control input-sm">
-                        <option>Red</option>
-                        <option>Blue</option>
-                        <option>Black</option>
+                          <% for(let i =0; i < detailProduct.storage.length; i++) { %>
+                          <option value="<%= detailProduct.storage[i].color %>"><%= detailProduct.storage[i].color %></option>
+                          <%}%>
                       </select>
                     </div>
                   </div>
@@ -151,7 +157,7 @@ Nostrud duis molestie at dolore.</p>
                     <div class="product-quantity">
                         <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
                     </div>
-                    <button class="btn btn-primary" type="submit">Add to cart</button>
+                    <a href="/shop-add-cartItem/<%= detailProduct._id %>" class="btn btn-primary" type="submit">Add to cart</a>
                   </div>
                   <div class="review">
                     <input type="range" value="4" step="0.25" id="backing4">
@@ -257,8 +263,10 @@ Nostrud duis molestie at dolore.</p>
                     </div>
                   </div>
                 </div>
-
+                <!-- NếU sale mớI hiển thị nhãn dán -->
+                <% if(detailProduct.sale != 0) { %>
                 <div class="sticker sticker-sale"></div>
+                <% } %>
               </div>
             </div>
           </div>
@@ -274,9 +282,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
@@ -289,9 +297,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
@@ -303,9 +311,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k3.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k3.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
@@ -317,9 +325,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k4.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k4.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
@@ -332,9 +340,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k1.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k1.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>
@@ -346,9 +354,9 @@ Nostrud duis molestie at dolore.</p>
               <div>
                 <div class="product-item">
                   <div class="pi-img-wrapper">
-                    <img src="assets/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
+                    <img src="/assets/pages/img/products/k2.jpg" class="img-responsive" alt="Berry Lace Dress">
                     <div>
-                      <a href="assets/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
+                      <a href="/assets/pages/img/products/k2.jpg" class="btn btn-default fancybox-button">Zoom</a>
                       <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
                     </div>
                   </div>

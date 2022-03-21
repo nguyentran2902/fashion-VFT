@@ -1,6 +1,7 @@
-
 import Product from '../models/Product';
+import Cart from '../models/Cart';
 import { faker } from '@faker-js/faker';
+
 const PAGE_SIZE = 9;
 
 let getFakeApiProduct = (req, res, next) => {
@@ -29,11 +30,23 @@ let getFakeApiProduct = (req, res, next) => {
         res.redirect('/');
     }
 }
-let getHomepage = (req, res) => {
+global.listCarts = null;
+let getHomepage = async (req, res) => {
+    if(req.session.userId) {
+        const listCart = await Cart.findOne({userId: req.session.userId}).populate('product._id');
+        listCarts = listCart;
+        return res.render('shop-index');
+    }
     return res.render('shop-index');
 }
 let getShopItem = (req, res) => {
-    return res.render('shop-item');
+    Product.findOne({_id: req.params.id}, function(err, product) {
+        if(product) {
+            return res.render('shop-item', {
+                detailProduct: product
+            })
+        }
+    })
 }
 let getShopAccout = (req, res) => {
     return res.render('shop-account');
@@ -41,6 +54,7 @@ let getShopAccout = (req, res) => {
 let getShopCheckout = (req, res) => {
     return res.render('shop-checkout');
 }
+// Phân trang
 let getShopProductList = (req, res) => {
     let page = req.query.page || 1;
     if(page) {
@@ -96,9 +110,7 @@ let getShopContacts = (req, res) => {
 let getShopShoppingCartNull = (req, res) => {
     return res.render('shop-shopping-cart-null');
 }
-let getAdmin = (req, res) => {
-    return res.render('admin');
-}
+
 
 module.exports = {
     getHomepage,
@@ -112,7 +124,6 @@ module.exports = {
     getShopStandartForms,
     getShopContacts,
     getShopShoppingCartNull,
-    getAdmin,
     getFakeApiProduct
 
 }
